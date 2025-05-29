@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<!-- 上記はEclipseの警告を消すための記述です。 -->
+
+
+
+<!--データベース接続を定義する設定ファイル-->
+<Context reloadable="true">
+	<Resource
+		name="jdbc/shoppingsite_sasaki"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/shoppingsite_sasaki"
+		username="root"
+		password="renon030228"
+	/>
+</Context>
