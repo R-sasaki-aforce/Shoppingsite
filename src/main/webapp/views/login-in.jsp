@@ -13,7 +13,7 @@
 			<br><input type="submit"value="ログイン">
 	</form>
 	
-	<form action="" method="get">
+	<form action="registration.jsp" method="get">
 	<input type="submit"value="新規会員登録">
 	</form>
 </body>

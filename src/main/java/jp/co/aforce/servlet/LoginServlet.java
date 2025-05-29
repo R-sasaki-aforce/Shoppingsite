@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 			if (matchedUser != null) {
 				// セッションにユーザー情報を保存
 				HttpSession session = request.getSession();
-				session.setAttribute("user", matchedUser);
+				
 				String name = userDao.iDlinkNAME(member_Id);
 				
 				session.setAttribute("userName", name);

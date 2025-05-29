@@ -10,13 +10,13 @@
 <%String name = (String)session.getAttribute("userName"); %>
 <p>ようこそ、<%=name %>さん！</p>
 
-	<form action="" method="post">
+	<form action="retouching.jsp" method="post">
 		<input type="submit" value="修正">
 	</form>
 	<form action="" method="post">
 		<input type="submit" value="削除">
 	</form>
-	<form action="login-in.jsp" method="post">
+	<form action="logout" method="post">
 		<input type="submit" value="ログアウト">
 	</form>
 
