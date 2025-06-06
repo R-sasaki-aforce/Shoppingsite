@@ -26,6 +26,10 @@ public class LoginFilter implements Filter {
 			 chain.doFilter(request, response);
 	            return;
 		 }
+		 if (servletPath.equals("/views/userDeleteSuccess.jsp") ) {
+			 chain.doFilter(request, response);
+	            return;
+		 }
 		
 		if (session != null ) {
 			chain.doFilter(request, response); // 通過させる
