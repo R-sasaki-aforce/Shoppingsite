@@ -3,6 +3,25 @@ package jp.co.aforce.beans;
 import java.io.Serializable;
 
 public class User implements Serializable{
+	
+	private String member_id;
+	private String password;
+	private String last_name;
+	private String first_name;
+	private String address;
+	private String mail_address;
+	
+	/**
+	 * @param member_id  ユーザーIDの
+	 * @param password   パスワード
+	 * @param last_name  名前(姓)
+	 * @param first_name 名前(名）
+	 * @param address    住所
+	 * @param mail_address  メールアドレス
+	 */
+	
+	
+	
 	public User(String member_id, String password, String last_name, String first_name, String address,
 			String mail_address) {
 		super();
@@ -14,12 +33,7 @@ public class User implements Serializable{
 		this.mail_address = mail_address;
 	}
 
-	private String member_id;
-	private String password;
-	private String last_name;
-	private String first_name;
-	private String address;
-	private String mail_address;
+	
 
 	public String getMember_id() {
 		return member_id;

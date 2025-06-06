@@ -22,7 +22,10 @@ public class LogOUT extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		session.removeAttribute("userName");
+		session.removeAttribute("loginUser");
+		session.removeAttribute("editinfo");
 		response.sendRedirect("login-in.jsp");
+//		確認用
 		System.out.println(session.getAttribute("userName"));
 	}
 

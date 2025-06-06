@@ -7,14 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>ログイン画面</h1>
+
+<%session.removeAttribute("confirminfo"); %>
 	<form action="login-in" method="post">
 		ID <input type="text" name="member_id" required> 
 		パスワード<input type="password" name="password" required> 
-			<br><input type="submit"value="ログイン">
+			<br><br><input type="submit"value="ログイン">
 	</form>
 	
-	<form action="registration.jsp" method="get">
-	<input type="submit"value="新規会員登録">
-	</form>
+<!--	<form action="registration.jsp" method="get">-->
+<!--	<input type="submit"value="新規会員登録">-->
+<!--	</form>-->
+	
+	<br><a href="registration.jsp">新規会員登録</a>
 </body>
 </html>
