@@ -46,12 +46,14 @@ public class LoginServlet extends HttpServlet {
 			}
 			//セッションはログインが成功が確定してから保存した方が良い
 			if (matchedUser != null) {
-				// セッションにユーザー情報を保存
+				
 				HttpSession session = request.getSession();
-				session.setAttribute("user", matchedUser);
+				
 				String name = userDao.iDlinkNAME(member_Id);
 				
-				session.setAttribute("userName", name);
+				//session.setAttribute("userName", name);
+				
+				session.setAttribute("loginUser", matchedUser);
 
 				response.sendRedirect("user-menu.jsp");
 			} else {
