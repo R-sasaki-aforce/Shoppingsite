@@ -5,39 +5,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../css/mypage.css" />
 <title>マイページ</title>
 </head>
 <body>
 
-<nav>
- <ul class="menu-nav">
-    <%User user=(User)session.getAttribute("loginUser"); %>
-	<%if(user!=null){ %>
-	
-	 <li><a href="user-menu.jsp"><%= user.getLast_name() %><%= user.getFirst_name() %>様</a></li>
+<nav class="navbar">
+  <ul class="menu-nav">
+    <!-- 左側（ロゴなど） -->
+    <li><a href="user-menu.jsp">Musicstore</a></li>
 
-	<%
-	}
-	%>
-	
-	
-	<%/*
-	}else{
-		response.sendRedirect("login-in.jsp");
-		}*/%>
-  
-  
-  
-  
- 
-    
-    <li><a href="#">商品一覧</a></li>
-    <li><a href="#">カート</a></li>
-    <li><a href="#">お気に入り</a></li>
-    <li><a href="#">お問い合わせ</a></li>
+    <!-- 右側のナビゲーションをラップ -->
+    <div class="menu-right">
+      <% User user = (User) session.getAttribute("loginUser"); %>
+      <% if (user != null) { %>
+        <li><a href="mypage.jsp"><%= user.getLast_name() %><%= user.getFirst_name() %> 様</a></li>
+      <% } %>
+      <li><a href="#">商品一覧</a></li>
+      <li><a href="#">カート</a></li>
+      <li><a href="#">お気に入り</a></li>
+      <li><a href="#">お問い合わせ</a></li>
+    </div>
   </ul>
 </nav>
-
 
 
 
