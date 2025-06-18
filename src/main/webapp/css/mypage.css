@@ -14,7 +14,7 @@ html, body {
   margin: 0;
   padding:10px 10px;
  
-  background-color: #3c4a5a;
+  background-color: rgb(29, 29, 29);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* ← 影を追加 */
 }
 
