@@ -22,7 +22,7 @@
         <li><a href="mypage.jsp"><%= user.getLast_name() %><%= user.getFirst_name() %> 様</a></li>
       <% } %>
       
-      <li><a href="#">カート</a></li>
+      <li><a href="cart.jsp">カート</a></li>
       <li><a href="#">お気に入り</a></li>
       <li><a href="#">お問い合わせ</a></li>
     </div>

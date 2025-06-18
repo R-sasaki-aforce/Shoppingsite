@@ -25,7 +25,46 @@ html, body {
   text-decoration: none;
   font-size: 13px;
 }
+/* 検索フォームの見た目 */
+.search-box form {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 
+.search-box input[type="text"] {
+  padding: 4px;
+  width: 200px;
+  border: none;
+  border-radius: 4px;
+}
+
+.search-box input[type="submit"] {
+  padding: 3px 10px;
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* .menu-nav の調整 */
+.menu-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 10px 10px;
+  background-color: rgb(29, 29, 29);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap; /* 画面が狭いとき折り返す */
+}
+
+/* 検索欄と他メニューの間隔 */
+.search-box {
+	margin-left:100px;
+}
 /* 右側のメニューをまとめて右に寄せる */
 .menu-right {
   display: flex;
