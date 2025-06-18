@@ -9,6 +9,6 @@
 <body>
 <h1>修正登録完了</h1>
 
-<a href="user-menu.jsp">会員メニューに戻る</a>
+<a href="mypage.jsp">マイページに戻る</a>
 </body>
 </html>

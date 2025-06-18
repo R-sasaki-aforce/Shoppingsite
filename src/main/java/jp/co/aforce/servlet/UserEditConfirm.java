@@ -14,7 +14,7 @@ import jp.co.aforce.beans.UserBean;
 /**
  * Servlet implementation class UserEditConfirm
  */
-@WebServlet("/views/usereditconfirm")
+@WebServlet("/views/secure/usereditconfirm")
 public class UserEditConfirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

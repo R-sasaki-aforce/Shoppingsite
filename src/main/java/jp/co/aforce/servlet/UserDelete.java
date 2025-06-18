@@ -14,7 +14,7 @@ import jp.co.aforce.dao.UserDao;
 
 //会員情報を消すサーブレット
 
-@WebServlet("/views/user-delete")
+@WebServlet("/views/secure/user-delete")
 public class UserDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +31,7 @@ public class UserDelete extends HttpServlet {
 		try {
 			dao.deleteUser(user);
 			session.invalidate();
-			response.sendRedirect("userDeleteSuccess.jsp");
+			response.sendRedirect(request.getContextPath() + "/views/userDeleteSuccess.jsp");
 			
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック

@@ -10,7 +10,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import jp.co.aforce.beans.Product;
 import jp.co.aforce.beans.User;
+import jp.co.aforce.dao.ProductDAO;
 import jp.co.aforce.dao.UserDao;
 
 /**
@@ -49,13 +51,20 @@ public class LoginServlet extends HttpServlet {
 				
 				HttpSession session = request.getSession();
 				
-				String name = userDao.iDlinkNAME(member_Id);
+				//String name = userDao.iDlinkNAME(member_Id);
 				
 				//session.setAttribute("userName", name);
 				
 				session.setAttribute("loginUser", matchedUser);
+				
+				// 商品一覧を取得してセッションに保存
+				ProductDAO productDao = new ProductDAO();
+				List<Product> products = productDao.getAllProducts();
+				session.setAttribute("productList", products);
+				
+				
 
-				response.sendRedirect("user-menu.jsp");
+				response.sendRedirect(request.getContextPath() + "/views/secure/user-menu.jsp");
 			} else {
 
 				response.sendRedirect("login-error.jsp");

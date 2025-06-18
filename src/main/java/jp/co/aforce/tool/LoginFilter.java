@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter("/views/*")
+@WebFilter("/views/secure/*")
 public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -21,21 +21,12 @@ public class LoginFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession(false);
 
-		String servletPath = req.getServletPath();
-		 if (servletPath.equals("/views/login-in.jsp") ) {
-			 chain.doFilter(request, response);
-	            return;
-		 }
-		 if (servletPath.equals("/views/userDeleteSuccess.jsp") ) {
-			 chain.doFilter(request, response);
-	            return;
-		 }
 		
-		if (session != null ) {
+		if (session != null&& session.getAttribute("loginUser") != null ) {
 			chain.doFilter(request, response); // 通過させる
 		} else {
 			// 未ログインならログインページにリダイレクト
-			res.sendRedirect("login-in.jsp");
+			res.sendRedirect(req.getContextPath() + "/views/sessionerror.jsp");
 		}
 	}
 	  public void init(FilterConfig Config) throws ServletException {}

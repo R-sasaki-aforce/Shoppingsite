@@ -17,7 +17,7 @@ import jp.co.aforce.beans.User;
 import jp.co.aforce.beans.UserBean;
 import jp.co.aforce.dao.UserDao;
 
-@WebServlet("/views/usereditadd")
+@WebServlet("/views/secure/usereditadd")
 public class UserEditAdd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
