@@ -48,75 +48,7 @@
 			for (Product product : productList) {
 		%>
 
-		<!--		<div class="item">-->
-		<!--			<img src="../../img/JIGDRESS.jpg" alt="JIGDRESS" title="JIGDRESS">-->
-		<!--			<div class="product name">-->
-		<!--				<p>JIGDRESS￥1,650</p>-->
-		<!--				プルダウン-->
-		<!--				<select name="quantity">-->
-		<!--					<option value="0">0</option>-->
-		<!--					<option value="1">1</option>-->
-		<!--					<option value="2">2</option>-->
-		<!--					<option value="3">3</option>-->
-		<!--					<option value="4">4</option>-->
-		<!--					<option value="5">5</option>-->
-		<!--					<option value="6">6</option>-->
-		<!--					<option value="7">7</option>-->
-		<!--					<option value="8">8</option>-->
-		<!--					<option value="9">9</option>-->
-		<!--				</select>-->
-		<!--				カートに追加ボタン-->
-		<!--				<button class="cartButton" data-id="2" data-name="ボディミスト"-->
-		<!--					data-price="1500" data-picture="img/kousui_atomizer.png">-->
-		<!--					カートに追加</button>-->
-		<!--			</div>-->
-		<!--		</div>-->
-		<!--		<div class="item">-->
-		<!--			<img src="../../img/クリーミー.jfif" alt="クリーミー" title="クリーミー">-->
-		<!--			<div class="product name">-->
-		<!--				<p>CRYAMY￥2,200</p>-->
-		<!--				プルダウン-->
-		<!--				<select name="quantity">-->
-		<!--					<option value="0">0</option>-->
-		<!--					<option value="1">1</option>-->
-		<!--					<option value="2">2</option>-->
-		<!--					<option value="3">3</option>-->
-		<!--					<option value="4">4</option>-->
-		<!--					<option value="5">5</option>-->
-		<!--					<option value="6">6</option>-->
-		<!--					<option value="7">7</option>-->
-		<!--					<option value="8">8</option>-->
-		<!--					<option value="9">9</option>-->
-		<!--				</select>-->
-		<!--				カートに追加ボタン-->
-		<!--				<button class="cartButton" data-id="2" data-name="ボディミスト"-->
-		<!--					data-price="1500" data-picture="img/kousui_atomizer.png">-->
-		<!--					カートに追加</button>-->
-		<!--			</div>-->
-		<!--		</div>-->
-		<!--		<div class="item">-->
-		<!--			<img src="../../img/ジュウ.jfif" alt="ジュウ" title="ジュウ">-->
-		<!--			<div class="product name">-->
-		<!--				<p>ジュウ￥2,000</p>-->
-		<!--				プルダウン-->
-		<!--				<select name="quantity">-->
-		<!--					<option value="0">0</option>-->
-		<!--					<option value="1">1</option>-->
-		<!--					<option value="2">2</option>-->
-		<!--					<option value="3">3</option>-->
-		<!--					<option value="4">4</option>-->
-		<!--					<option value="5">5</option>-->
-		<!--					<option value="6">6</option>-->
-		<!--					<option value="7">7</option>-->
-		<!--					<option value="8">8</option>-->
-		<!--					<option value="9">9</option>-->
-		<!--				</select>-->
-		<!--				カートに追加ボタン-->
-		<!--				<button class="cartButton" data-id="2" data-name="ボディミスト"-->
-		<!--					data-price="1500" data-picture="img/kousui_atomizer.png">-->
-		<!--					カートに追加</button>-->
-		<!--			</div>-->
-		<!--		</div>-->
+		
 		<div class="item">
 			<img src="<%=product.getImagePath()%>"
 				alt="<%=product.getName()%>" title="<%=product.getName()%>">
