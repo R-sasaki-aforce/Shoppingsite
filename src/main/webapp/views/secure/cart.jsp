@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@page import="jp.co.aforce.beans.User"%>
 <%@ page import="java.util.List"%>
 <%@ page import="jp.co.aforce.beans.Product"%>
@@ -44,58 +44,5 @@
 		</ul>
 	</nav>
 
-
-
-
-	<div class="items">
-		<%
-		List<Product> productList = (List<Product>) session.getAttribute("productList");
-		if (productList != null && !productList.isEmpty()) {
-			for (Product product : productList) {
-		%>
-
-
-		<div class="item">
-			<img src="<%=product.getImagePath()%>" alt="<%=product.getName()%>"
-				title="<%=product.getName()%>">
-			<div class="product name">
-				<p><%=product.getName()%>
-					￥<%=product.getPrice()%></p>
-
-				<select name="quantity">
-					<%
-					for (int i = 0; i <= 9; i++) {
-					%>
-					<option value="<%=i%>"><%=i%></option>
-					<%
-					}
-					%>
-				</select>
-
-				<!-- カートに追加ボタン -->
-				<button class="cartButton" data-id="<%=product.getProductId()%>"
-					data-name="<%=product.getName()%>"
-					data-price="<%=product.getPrice()%>"
-					data-picture="<%=product.getImagePath()%>">カートに追加</button>
-			</div>
-
-
-
-		</div>
-	</div>
-	<!-- item -->
-	<%
-	}
-	%>
-	<!-- ← for 文の閉じ -->
-	<%
-	} else {
-	%>
-	<p>現在、商品が登録されていません。</p>
-	<%
-	}
-	%>
-	</div>
-	<!-- items -->
 </body>
 </html>
