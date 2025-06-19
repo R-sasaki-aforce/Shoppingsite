@@ -10,6 +10,7 @@ public class User implements Serializable{
 	private String first_name;
 	private String address;
 	private String mail_address;
+	private int role;
 	
 	/**
 	 * @param member_id  ユーザーIDの
@@ -34,6 +35,20 @@ public class User implements Serializable{
 	}
 
 	
+
+	public User(String member_id, String password, String last_name, String first_name, String address,
+			String mail_address, int role) {
+		super();
+		this.member_id = member_id;
+		this.password = password;
+		this.last_name = last_name;
+		this.first_name = first_name;
+		this.address = address;
+		this.mail_address = mail_address;
+		this.role = role;
+	}
+
+
 
 	public String getMember_id() {
 		return member_id;
@@ -82,5 +97,18 @@ public class User implements Serializable{
 	public void setMail_address(String mail_address) {
 		this.mail_address = mail_address;
 	}
+
+
+
+	public int getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(int role) {
+		this.role = role;
+	}
+	
 
 }

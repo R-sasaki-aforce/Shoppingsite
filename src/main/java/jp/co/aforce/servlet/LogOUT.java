@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 /**
  * Servlet implementation class LogOUT
  */
-@WebServlet("/views/secure/logout")
+@WebServlet(urlPatterns = {"/views/secure/logout","/views/secure/admin/logout"})
 public class LogOUT extends HttpServlet {
 	
        
