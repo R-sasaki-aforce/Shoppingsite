@@ -56,15 +56,17 @@ public class LoginServlet extends HttpServlet {
 				//session.setAttribute("userName", name);
 				
 				session.setAttribute("loginUser", matchedUser);
-				
+//			管理者か一般かを判断
+				if(matchedUser.getRole()!=0) {
+					response.sendRedirect(request.getContextPath() + "/views/secure/admin/admin-menu.jsp");
+				}else {
 				// 商品一覧を取得してセッションに保存
 				ProductDAO productDao = new ProductDAO();
 				List<Product> products = productDao.getAllProducts();
 				session.setAttribute("productList", products);
 				
-				
-
 				response.sendRedirect(request.getContextPath() + "/views/secure/user-menu.jsp");
+				}
 			} else {
 
 				response.sendRedirect("login-error.jsp");

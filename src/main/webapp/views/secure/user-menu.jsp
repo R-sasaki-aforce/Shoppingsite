@@ -56,13 +56,13 @@
 
 
 		<div class="item">
-			<img src="<%=product.getImagePath()%>" alt="<%=product.getName()%>"
+			<img src="<%=request.getContextPath() +"/uploads/" + product.getImagePath()%>" alt="<%=product.getName()%>"
 				title="<%=product.getName()%>">
 			<div class="product name">
 				<p><%=product.getName()%>
 					￥<%=product.getPrice()%></p>
 
-				<select name="quantity">
+				<select name="quantity"class="quantity">
 					<%
 					for (int i = 0; i <= 9; i++) {
 					%>
@@ -87,7 +87,7 @@
 	<%
 	}
 	%>
-	<!-- ← for 文の閉じ -->
+	
 	<%
 	} else {
 	%>
@@ -97,5 +97,44 @@
 	%>
 	</div>
 	<!-- items -->
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // カートに追加ボタンがクリックされた時の処理
+        $('.cartButton').click(function () {
+            const button = $(this);
+
+            const productId = button.data('id');
+            const quantity = button.closest('.product').find('.quantity').val();
+
+            // 数量が0の場合はアラート
+            if (!quantity || quantity == 0) {
+                alert("数量を選択してください。");
+                return;
+            }
+
+            $.ajax({
+                url: '<%= request.getContextPath() %>/AddToCart',  // 相対パスでサーブレット指定
+                type: 'POST',
+                data: {
+                    product_id: productId,
+                    quantity: quantity
+                },
+                success: function (responseText) {
+                    alert(responseText);  // サーブレットからのメッセージを表示
+                },
+                error: function (xhr) {
+                    if (xhr.status === 401) {
+                        alert("ログインしてください。");
+                        location.href = "<%= request.getContextPath() %>/views/login-in.jsp";
+                    } else {
+                        alert("商品追加に失敗しました。");
+                    }
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

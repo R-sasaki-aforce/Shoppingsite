@@ -29,7 +29,8 @@ public class UserDao extends DAO {
 			String first_name = rs.getString("FIRST_NAME");
 			String address = rs.getString("ADDRESS");
 			String mail_address = rs.getString("MAIL_ADDRESS");
-			User user = new User(member_id, password, last_name, first_name, address, mail_address);
+			int role =rs.getInt("ROLE");
+			User user = new User(member_id, password, last_name, first_name, address, mail_address,role);
 			userslist.add(user);
 
 			//userslist.add(new User(member_id,password,last_name,first_name,address,mail_address));

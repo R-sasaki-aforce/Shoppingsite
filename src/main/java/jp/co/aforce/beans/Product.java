@@ -1,8 +1,9 @@
 package jp.co.aforce.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Product {
+public class Product implements Serializable{
 	
 	private int productId;
 	private String name;
@@ -16,6 +17,8 @@ public class Product {
 	private String imagePath;
 	private Date createdAt;
 	private Date updatedAt;
+	
+	private int quantity;
 	
 	/**
 	 * 
@@ -33,22 +36,7 @@ public class Product {
 	 * @param updatedAt  更新日時
 	 */
 	
-	public Product(int productId, String name, String artistName, String genre, int price, int stock, Date releaseDate,
-			String description, String sampleUrl, String imagePath, Date createdAt, Date updatedAt) {
-		super();
-		this.productId = productId;
-		this.name = name;
-		this.artistName = artistName;
-		this.genre = genre;
-		this.price = price;
-		this.stock = stock;
-		this.releaseDate = releaseDate;
-		this.description = description;
-		this.sampleUrl = sampleUrl;
-		this.imagePath = imagePath;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
+	
 
 
 
@@ -166,8 +154,8 @@ public class Product {
 
 
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setImagePath(String imagepath) {
+		this.imagePath = imagepath;
 	}
 
 
@@ -193,6 +181,21 @@ public class Product {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+
+
 	
 	
 	
