@@ -1,6 +1,3 @@
-/**
- * 
- */
 document.addEventListener("DOMContentLoaded", function() {
 	const deliveryRadios = document.getElementsByName("delivery_method");
 	const placementOptions = document.getElementById("placement-options");
@@ -8,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// 状態初期化
 	function togglePlacementOptions() {
 		const selected = Array.from(deliveryRadios).find(r => r.checked);
-		if (selected && selected.value === "置き配") {
+		if (selected && selected.value === "okihai") {
 			placementOptions.style.display = "block";
 		} else {
 			placementOptions.style.display = "none";

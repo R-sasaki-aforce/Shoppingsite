@@ -38,7 +38,7 @@ String totalPrice = request.getParameter("total_price");
 </label><br>
 
 <label>
-	<input type="radio" name="delivery_method" value="置き配">
+	<input type="radio" name="delivery_method" value="okihai">
 	置き配
 </label>
 
@@ -47,9 +47,6 @@ String totalPrice = request.getParameter("total_price");
 	<label><input type="radio" name="placement_location" value="玄関ドア前" checked>玄関ドア前</label><br>
 	<label><input type="radio" name="placement_location" value="宅配BOX">宅配BOX</label><br>
 	<label><input type="radio" name="placement_location" value="ガスメーターBOX">ガスメーターBOX</label><br>
-	<label><input type="radio" name="placement_location" value="物置">物置</label><br>
-	<label><input type="radio" name="placement_location" value="車庫">車庫</label><br>
-	<label><input type="radio" name="placement_location" value="自転車かご">自転車かご</label><br>
 	<label><input type="radio" name="placement_location" value="建物内受付/管理人預け">建物内受付/管理人預け</label><br>
 </div>
 
@@ -59,6 +56,8 @@ String totalPrice = request.getParameter("total_price");
 		<br><br>
 		<input type="submit" value="注文確定">
 	</form>
+	
 <script src="../../js/order.js"></script>
+<a href="cart.jsp">カートに戻る</a>
 </body>
 </html>
