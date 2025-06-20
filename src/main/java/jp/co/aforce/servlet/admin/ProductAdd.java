@@ -1,6 +1,7 @@
 package jp.co.aforce.servlet.admin;
 
 import java.io.IOException;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,6 +39,9 @@ public class ProductAdd extends HttpServlet {
 			if (result > 0) {
 				// 成功時：セッションのデータを削除し、完了ページへ
 				session.removeAttribute("AddproductConf");
+				List<Product> products = dao.getAllProducts();
+				
+				session.setAttribute("productList", products);
 				request.getRequestDispatcher("productadd-success.jsp").forward(request, response);
 			} else {
 				// 失敗時
