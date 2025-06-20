@@ -309,4 +309,87 @@ public class ProductDAO extends DAO {
 
 		con.close();
 	}
+
+	/**
+	 * 注文内容をorders,order_itemsテーブルに登録
+	 * @param memberId
+	 * @param cartItems
+	 * @param paymentMethod
+	 * @param shippingAddress
+	 * @param deliveryMethod
+	 * @param placementLocation
+	 * @param totalPrice
+	 * @throws Exception
+	 */
+	public void insertOrder(String memberId, List<Product> cartItems, String paymentMethod,
+			String shippingAddress, String deliveryMethod, String placementLocation,
+			int totalPrice) throws Exception {
+
+		Connection con = getConnection();
+
+		try {
+			con.setAutoCommit(false);
+
+			// 1. orders テーブルに挿入
+			String insertOrderSql = """
+					INSERT INTO orders (member_id, order_date, payment_method, shipping_address,
+					                    delivery_method, placement_location, total_price)
+					VALUES (?, NOW(), ?, ?, ?, ?, ?)
+					""";
+			int orderId;
+			try (PreparedStatement ps = con.prepareStatement(insertOrderSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+				ps.setString(1, memberId);
+				ps.setString(2, paymentMethod);
+				ps.setString(3, shippingAddress);
+				ps.setString(4, deliveryMethod);
+				ps.setString(5, placementLocation);
+				ps.setInt(6, totalPrice);
+
+				ps.executeUpdate();
+
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next()) {
+					orderId = rs.getInt(1);
+				} else {
+					throw new Exception("注文IDの取得に失敗しました。");
+				}
+			}
+
+			// 2. order_items テーブルに挿入
+			String insertItemSql = """
+					INSERT INTO order_items (order_id, product_id, quantity, price)
+					VALUES (?, ?, ?, ?)
+					""";
+			try (PreparedStatement ps = con.prepareStatement(insertItemSql)) {
+				for (Product p : cartItems) {
+					ps.setInt(1, orderId);
+					ps.setInt(2, p.getProductId());
+					ps.setInt(3, p.getQuantity());
+					ps.setInt(4, p.getPrice());
+					ps.addBatch();
+				}
+				ps.executeBatch();
+			}
+
+			// 3. カートを空にする
+			String clearCartSql = """
+					DELETE FROM cart_items
+					WHERE cart_id = (SELECT cart_id FROM cart WHERE member_id = ?)
+					""";
+			try (PreparedStatement ps = con.prepareStatement(clearCartSql)) {
+				ps.setString(1, memberId);
+				ps.executeUpdate();
+			}
+
+			con.commit();
+
+		} catch (Exception e) {
+			con.rollback();
+			throw e;
+		} finally {
+			con.setAutoCommit(true);
+			con.close();
+		}
+	}
+
 }

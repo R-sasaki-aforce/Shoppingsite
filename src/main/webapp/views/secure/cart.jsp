@@ -104,7 +104,15 @@ List<Product> cartList = dao.getCartProducts(user.getMember_id());
 		<h3>
 			合計: ¥<%=total%></h3>
 	</div>
+	<%
+	session.setAttribute("cartList", cartList);
+	request.setAttribute("total_price", total);
+	%>
+	<form action="order-form.jsp" method="post">
+		<input type="hidden" name="total_price" value="<%=total%>">
+		<input type="submit" value="お会計に進む">
+	</form>
 	<script src="../../js/cart.js"></script>
-	
+
 </body>
 </html>
