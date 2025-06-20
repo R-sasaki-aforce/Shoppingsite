@@ -391,5 +391,112 @@ public class ProductDAO extends DAO {
 			con.close();
 		}
 	}
+	/**
+	 * プロダクトIDに紐づく商品情報を取得
+	 * @param productId
+	 * @return
+	 * @throws Exception
+	 */
+	public Product getProductById(int productId) throws Exception {
+		Connection con = getConnection();
+		String sql = "SELECT * FROM products WHERE product_id = ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, productId);
+		ResultSet rs = st.executeQuery();
 
+		Product p = null;
+		if (rs.next()) {
+			p = new Product();
+			p.setProductId(rs.getInt("product_id"));
+			p.setName(rs.getString("name"));
+			p.setArtistName(rs.getString("artist_name"));
+			p.setGenre(rs.getString("genre"));
+			p.setPrice(rs.getInt("price"));
+			p.setStock(rs.getInt("stock"));
+			p.setReleaseDate(rs.getDate("release_date"));
+			p.setDescription(rs.getString("description"));
+			p.setSampleUrl(rs.getString("sample_url"));
+			p.setImagePath(rs.getString("image_path"));
+			p.setCreatedAt(rs.getTimestamp("created_at"));
+			p.setUpdatedAt(rs.getTimestamp("updated_at"));
+		}
+
+		rs.close();
+		st.close();
+		con.close();
+
+		return p;
+	}
+	
+	/**
+	 * 編集した商品情報を更新するメソッド
+	 * @param p
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateProduct(Product p) throws Exception {
+		Connection con = getConnection();
+
+		String sql;
+		PreparedStatement st;
+
+		if (p.getImagePath() != null && !p.getImagePath().isEmpty()) {
+			// 画像も含めて更新
+			sql = "UPDATE products SET name=?, artist_name=?, genre=?, price=?, stock=?, release_date=?, image_path=?, updated_at=NOW() WHERE product_id=?";
+			st = con.prepareStatement(sql);
+			st.setString(1, p.getName());
+			st.setString(2, p.getArtistName());
+			st.setString(3, p.getGenre());
+			st.setInt(4, p.getPrice());
+			st.setInt(5, p.getStock());
+
+			if (p.getReleaseDate() != null) {
+				st.setDate(6, new java.sql.Date(p.getReleaseDate().getTime()));
+			} else {
+				st.setNull(6, java.sql.Types.DATE);
+			}
+
+			st.setString(7, p.getImagePath());
+			st.setInt(8, p.getProductId());
+
+		} else {
+			// 画像以外を更新
+			sql = "UPDATE products SET name=?, artist_name=?, genre=?, price=?, stock=?, release_date=?, updated_at=NOW() WHERE product_id=?";
+			st = con.prepareStatement(sql);
+			st.setString(1, p.getName());
+			st.setString(2, p.getArtistName());
+			st.setString(3, p.getGenre());
+			st.setInt(4, p.getPrice());
+			st.setInt(5, p.getStock());
+
+			if (p.getReleaseDate() != null) {
+				st.setDate(6, new java.sql.Date(p.getReleaseDate().getTime()));
+			} else {
+				st.setNull(6, java.sql.Types.DATE);
+			}
+
+			st.setInt(7, p.getProductId());
+		}
+
+		int result = st.executeUpdate();
+
+		st.close();
+		con.close();
+
+		return result;
+	}
+	public int deleteProduct(int productId) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "DELETE FROM products WHERE product_id = ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, productId);
+
+		int result = st.executeUpdate();
+
+		st.close();
+		con.close();
+
+		return result;
+	}
 }

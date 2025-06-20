@@ -11,7 +11,8 @@
 	<h1>管理者用メニュー</h1>
 
 
-	<a href="admin-ProductsList.jsp">商品管理</a>
+	
+	<a href="admin-product-list">商品管理</a>
 	<a href="admin-usersList.jsp">会員情報管理</a>
 	<a href="admin-OrderHistoryList.jsp">注文履歴</a>
 
