@@ -78,17 +78,22 @@ public class ProductAddConfirm extends HttpServlet {
 	        // ファイル名が取得できた場合、保存処理を行います
 	        if (fileName != null && !fileName.isEmpty()) {
 	            // サーバー上のディレクトリにファイルを保存する処理を追加
-	        	 String uploadDirectory =("C:/uploads/");  // 相対パスを使用
-	        	 File dir = new File(uploadDirectory);
-	        	 if (!dir.exists()) {
-	                 dir.mkdirs();  // ディレクトリが存在しない場合、作成
+	        	// String uploadDirectory =("C:/uploads/");  // 相対パスを使用
+	        	 String uploadDirectory2 = getServletContext().getRealPath("/img/");
+	        	// File dir = new File(uploadDirectory);
+	        	 File dir2 = new File(uploadDirectory2);
+	        	 //if (!dir.exists()) {
+	                 //dir.mkdirs();  // ディレクトリが存在しない場合、作成
+	            // }
+	        	 if (!dir2.exists()) {
+	                 dir2.mkdirs();  // ディレクトリが存在しない場合、作成
 	             }
 	        	 // ファイル保存先のフルパス
-	             String fileSavePath = uploadDirectory + fileName;
-
+	             //String fileSavePath = uploadDirectory + fileName;
+	             String fileSavePath2 = uploadDirectory2 + fileName;
 	             // ファイルを保存
-	             filePart.write(fileSavePath);  //// 実際にファイルをサーバーに保存
-
+	             //filePart.write(fileSavePath);  //// 実際にファイルをサーバーに保存
+	             filePart.write(fileSavePath2);
 	             System.out.println("File uploaded: " + fileName);
 	        	 
 	        	 

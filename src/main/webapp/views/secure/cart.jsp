@@ -63,7 +63,7 @@ List<Product> cartList = dao.getCartProducts(user.getMember_id());
 	%>
 	<div>
 		<img
-			src="<%=request.getContextPath() + "/uploads/" + p.getImagePath()%>"
+			src="<%=request.getContextPath() + "/img/" + p.getImagePath()%>"
 			width="100">
 		<p>
 			商品名:

@@ -37,7 +37,7 @@
         在庫数: <input type="number" name="stock" value="<%= product.getStock() %>"> 個<br>
         発売日: <input type="date" name="release_date" value="<%= product.getReleaseDate() %>"><br>
 
-        現在の画像: <img src="<%= request.getContextPath() + "/uploads/" + product.getImagePath() %>" width="100"><br>
+        現在の画像: <img src="<%= request.getContextPath() + "/img/" + product.getImagePath() %>" width="100"><br>
         画像変更: <input type="file" name="image_path"><br>
 
         <input type="submit" value="確認">

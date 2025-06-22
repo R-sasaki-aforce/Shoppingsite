@@ -64,7 +64,7 @@ String placement = (order != null && order.getPlacementLocation() != null) ? ord
 				int itemTotal = p.getPrice() * p.getQuantity();
 		%>
 		<div style="margin-bottom: 10px;">
-			<img src="<%=request.getContextPath() + "/uploads/" + p.getImagePath()%>" width="80">
+			<img src="<%=request.getContextPath() + "/img/" + p.getImagePath()%>" width="80">
 			<p>商品名：<%=p.getName()%></p>
 			<p>数量：<%=p.getQuantity()%> 個</p>
 			<p>小計：¥<%=itemTotal%></p>

@@ -173,6 +173,26 @@ public class UserDao extends DAO {
 				con.close();
 		}
 	}
+	public void deleteUser(String user) throws Exception {
+		Connection con = null;
+		PreparedStatement st = null;
+
+		try {
+			con = getConnection();
+			String sql = "DELETE FROM users WHERE MEMBER_ID = ?";
+			st = con.prepareStatement(sql);
+			st.setString(1, user);
+
+			//int result = 
+			st.executeUpdate();
+			//return result > 0;
+		} finally {
+			if (st != null)
+				st.close();
+			if (con != null)
+				con.close();
+		}
+	}
 /**
  * 編集したあとになどに使う
  * 

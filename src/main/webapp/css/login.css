@@ -16,7 +16,7 @@ body {
 /* ログイン画面のタイトル（中央上） */
 .header-title {
     position: absolute;
-    top: 64px;
+    top: 19%;
     left: 50%;
     transform: translateX(-50%);
     font-size: 20px;
