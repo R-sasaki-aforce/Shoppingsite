@@ -1,5 +1,6 @@
 package jp.co.aforce.servlet.admin;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 
@@ -33,9 +34,29 @@ public class EditProductConfirm extends HttpServlet {
 		String releaseDate = request.getParameter("release_date");
 		
 		
-		Part imagePart = request.getPart("image_path");
-		String imageFileName = imagePart.getSubmittedFileName();
+		Part filePart = request.getPart("image_path");
+		String fileName = filePart.getSubmittedFileName();
 		
+		 if (fileName != null && !fileName.isEmpty()) {
+	            // サーバー上のディレクトリにファイルを保存する処理を追加
+	        	// String uploadDirectory =("C:/uploads/");  // 相対パスを使用
+	        	 String uploadDirectory2 = getServletContext().getRealPath("/img/");
+	        	// File dir = new File(uploadDirectory);
+	        	 File dir2 = new File(uploadDirectory2);
+	        	 //if (!dir.exists()) {
+	                 //dir.mkdirs();  // ディレクトリが存在しない場合、作成
+	            // }
+	        	 if (!dir2.exists()) {
+	                 dir2.mkdirs();  // ディレクトリが存在しない場合、作成
+	             }
+	        	 // ファイル保存先のフルパス
+	             //String fileSavePath = uploadDirectory + fileName;
+	             String fileSavePath2 = uploadDirectory2 + fileName;
+	             // ファイルを保存
+	             //filePart.write(fileSavePath);  //// 実際にファイルをサーバーに保存
+	             filePart.write(fileSavePath2);
+	             System.out.println("File uploaded: " + fileName);
+		 }
 		
 		HttpSession session = request.getSession();
 		Product product = new Product();
@@ -50,10 +71,10 @@ public class EditProductConfirm extends HttpServlet {
 			product.setReleaseDate(Date.valueOf(releaseDate));
 		}
 		
-		product.setImagePath(imageFileName); // 仮でファイル名だけ保持（本保存は後で）
+		product.setImagePath(fileName); // 仮でファイル名だけ保持（本保存は後で）
 
 		session.setAttribute("product", product);
-		session.setAttribute("imagePart", imagePart); // 画像ファイルのPartも保持
+		session.setAttribute("imagePart", filePart); // 画像ファイルのPartも保持
 
 		request.getRequestDispatcher("admin-EditProductConfirm.jsp").forward(request, response);
 	}

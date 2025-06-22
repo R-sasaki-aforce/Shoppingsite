@@ -2,6 +2,7 @@ package jp.co.aforce.servlet.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -73,9 +74,23 @@ public class ProductAddConfirm extends HttpServlet {
 	        String description = request.getParameter("description");
 	        String sampleUrl = request.getParameter("sample_url");
 //	        Part  = request.getPart("image_path");
-	        Part filePart = request.getPart("image_path");  // "image_path" フィールドからファイルを取得
-	        String fileName = filePart.getSubmittedFileName();  // アップロードされたファイル名を取得
+	        Part imagePart = request.getPart("image_path");
+	        String fileName = null;
+
+	        // ファイル名を取得（空文字列になる場合もある）
+	        String submittedFileName = Paths.get(imagePart.getSubmittedFileName()).getFileName().toString();
+
+	        if (submittedFileName != null && !submittedFileName.isEmpty()) {
+	            // 新しい画像が選ばれている
+	            fileName = submittedFileName;
+	            // 保存処理（imagePart.getInputStream()など）を行う
+	        } else {
+	            // 画像が選択されていない場合（ファイル名が空）
+	            fileName = request.getParameter("current_image_path");
+	        }
+
 	        // ファイル名が取得できた場合、保存処理を行います
+	         
 	        if (fileName != null && !fileName.isEmpty()) {
 	            // サーバー上のディレクトリにファイルを保存する処理を追加
 	        	// String uploadDirectory =("C:/uploads/");  // 相対パスを使用
@@ -93,7 +108,7 @@ public class ProductAddConfirm extends HttpServlet {
 	             String fileSavePath2 = uploadDirectory2 + fileName;
 	             // ファイルを保存
 	             //filePart.write(fileSavePath);  //// 実際にファイルをサーバーに保存
-	             filePart.write(fileSavePath2);
+	             imagePart.write(fileSavePath2);
 	             System.out.println("File uploaded: " + fileName);
 	        	 
 	        	 

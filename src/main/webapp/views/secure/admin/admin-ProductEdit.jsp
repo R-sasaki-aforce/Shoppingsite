@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="jp.co.aforce.beans.Product" %>
 <%
-    Product product = (Product) request.getAttribute("product");
+    Product product = (Product) session.getAttribute("product");
 %>
 <%
 	Product product2 = (Product) session.getAttribute("product");
@@ -38,6 +38,8 @@
         発売日: <input type="date" name="release_date" value="<%= product.getReleaseDate() %>"><br>
 
         現在の画像: <img src="<%= request.getContextPath() + "/img/" + product.getImagePath() %>" width="100"><br>
+        <!-- hidden フィールドで現在の画像ファイル名も送信 -->
+        <input type="hidden" name="current_image_path" value="<%= product.getImagePath() %>">
         画像変更: <input type="file" name="image_path"><br>
 
         <input type="submit" value="確認">

@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import jp.co.aforce.beans.Product;
 import jp.co.aforce.dao.ProductDAO;
@@ -42,8 +43,10 @@ public class EditProduct extends HttpServlet {
 			}
 
 			// JSPに商品情報を渡す
-			request.setAttribute("product", product);
-			request.getRequestDispatcher("admin-ProductEdit.jsp").forward(request, response);
+			HttpSession session = request.getSession();
+			session.setAttribute("product", product);
+			response.sendRedirect("admin-ProductEdit.jsp");
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
