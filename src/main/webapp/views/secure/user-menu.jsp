@@ -51,8 +51,15 @@
 		%>
 
 		<div class="item">
-			<img src="<%=request.getContextPath() +"/img/" + product.getImagePath()%>" alt="<%=product.getName()%>"
+		 <div class="image-wrapper">
+		<% if (product.getStock() <= 0) { %>
+	
+	<img class="soldout-overlay"src="../../img/ソールドアウト.jpg" alt="ソールドアウト"title="ソールドアウト">
+	
+<% } %>
+			<img class="product-image" src="<%=request.getContextPath() +"/img/" + product.getImagePath()%>" alt="<%=product.getName()%>"
 				title="<%=product.getName()%>">
+				</div>
 			<div class="product-details">
     <p class="product-genre"><%=product.getGenre()%></p> <!-- ジャンル -->
    <p class="product-name"><%=product.getName()%></p>
@@ -65,7 +72,7 @@
     <select name="quantity" class="quantity">
         <%
         int maxQuantity = 10;
-        for (int i = 1; i <= maxQuantity; i++) {
+        for (int i = 0; i <= maxQuantity; i++) {
         %>
         <option value="<%=i%>"><%=i%></option>
         <%
@@ -76,7 +83,9 @@
     <button class="cartButton" data-id="<%=product.getProductId()%>"
         data-name="<%=product.getName()%>"
         data-price="<%=product.getPrice()%>"
-        data-picture="<%=product.getImagePath()%>">カートに追加</button>
+        data-picture="<%=product.getImagePath()%>"
+        data-stock="<%=product.getStock()%>"
+        >カートに追加</button>
 </div>
 </div>
 		</div>
@@ -89,45 +98,10 @@
 		}
 		%>
 	</div>
-
+<script>
+	const contextPath = '<%= request.getContextPath() %>';
+</script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-	$(document).ready(function () {
-		// カートに追加ボタンがクリックされた時の処理
-		$('.cartButton').click(function () {
-			const button = $(this);
-
-			const productId = button.data('id');
-			const quantity = button.closest('.product-details').find('.quantity').val();
-
-			// 数量が0の場合はアラート
-			if (!quantity || quantity == 0) {
-				alert("数量を選択してください。");
-				return;
-			}
-
-			$.ajax({
-				url: '<%= request.getContextPath() %>/AddToCart',  // 相対パスでサーブレット指定
-				type: 'POST',
-				data: {
-					product_id: productId,
-					quantity: quantity
-				},
-				success: function (responseText) {
-					alert(responseText);  // サーブレットからのメッセージを表示
-				},
-				error: function (xhr, status, error) {
-					if (xhr.status === 401) {
-						alert("ログインしてください。");
-						location.href = "<%= request.getContextPath() %>/views/login-in.jsp";
-					} else if (xhr.status !== 200) {
-						alert("商品追加に失敗しました: " + error);
-					}
-				}
-			});
-		});
-	});
-	</script>
-
+	<script src="../../js/menu.js"></script>
 </body>
 </html>

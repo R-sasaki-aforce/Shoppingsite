@@ -34,9 +34,9 @@ String placement = (order != null && order.getPlacementLocation() != null) ? ord
 		<!-- 支払方法 -->
 		<p>支払方法：</p>
 		<select name="payment_method" id="payment_method" required onchange="updateTotal()">
-			<option value="credit" <%= order != null && "credit".equals(order.getPaymentMethod()) ? "selected" : "" %>>クレジットカード(手数料: ¥0)</option>
-			<option value="cod" <%= order != null && "cod".equals(order.getPaymentMethod()) ? "selected" : "" %>>代引き引き換え (手数料: ¥330)</option>
-			<option value="convenience" <%= order != null && "convenience".equals(order.getPaymentMethod()) ? "selected" : "" %>>コンビニ (手数料: ¥330)</option>
+			<option value="クレジットカード" <%= order != null && "クレジットカード".equals(order.getPaymentMethod()) ? "selected" : "" %>>クレジットカード(手数料: ¥0)</option>
+			<option value="代引き引き換え" <%= order != null && "代引き引き換え".equals(order.getPaymentMethod()) ? "selected" : "" %>>代引き引き換え (手数料: ¥330)</option>
+			<option value="コンビニ支払い" <%= order != null && "コンビニ支払い".equals(order.getPaymentMethod()) ? "selected" : "" %>>コンビニ (手数料: ¥330)</option>
 		</select>
 
 		<!-- お届け先 -->

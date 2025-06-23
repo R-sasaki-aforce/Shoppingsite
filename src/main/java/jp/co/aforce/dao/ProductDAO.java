@@ -499,4 +499,27 @@ public class ProductDAO extends DAO {
 
 		return result;
 	}
+	/**
+	 * 購入後に在庫数を減らすメソッド
+	 * @param productId 商品ID
+	 * @param quantity 減らす数量
+	 * @throws Exception
+	 */
+	public void decreaseStock(int productId, int quantity) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "UPDATE products SET stock = stock - ? WHERE product_id = ? AND stock >= ?";
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, quantity);
+			ps.setInt(2, productId);
+			ps.setInt(3, quantity); // マイナスにならないように確認
+			int result = ps.executeUpdate();
+
+			if (result == 0) {
+				throw new Exception("在庫不足または商品IDが存在しません: product_id=" + productId);
+			}
+		}
+
+		con.close();
+	}
 }

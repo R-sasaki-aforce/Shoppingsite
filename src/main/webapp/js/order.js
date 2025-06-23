@@ -27,7 +27,7 @@ function updateTotal() {
 	const method = document.getElementById("payment_method").value;
 
 	let fee = 0;
-	if (method === "cod" || method === "convenience") {
+	if (method === "代引き引き換え" || method === "コンビニ支払い") {
 		fee = 330;
 	}
 

@@ -4,6 +4,23 @@
 <%
 	Order order = (Order) session.getAttribute("order");
 	List<Product> cartList = (List<Product>) session.getAttribute("cartList");
+
+	// 商品合計の計算
+	int subtotal = 0;
+	if (cartList != null) {
+		for (Product p : cartList) {
+			subtotal += p.getPrice() * p.getQuantity();
+		}
+	}
+
+	// 手数料の計算（330円：代引きまたはコンビニ）
+	int fee = 0;
+	String method = order.getPaymentMethod();
+	if ("代引き引き換え".equals(method) || "コンビニ支払い".equals(method)) {
+		fee = 330;
+	}
+	int shipping = 330;
+	int total = subtotal + shipping + fee;
 %>
 
 <!DOCTYPE html>
@@ -19,7 +36,6 @@
 	<p>支払方法：<%= order.getPaymentMethod() %></p>
 	<p>お届け先：<%= order.getShippingAddress() %></p>
 	<p>受取方法：<%= order.getDeliveryMethod() %></p>
-
 	<% if ("置き配".equals(order.getDeliveryMethod())) { %>
 		<p>置き場所：<%= order.getPlacementLocation() %></p>
 	<% } %>
@@ -29,7 +45,7 @@
 		for (Product p : cartList) {
 	%>
 		<div>
-			<img src="<%= request.getContextPath() + "/uploads/" + p.getImagePath() %>" width="80">
+			<img src="<%= request.getContextPath() + "/img/" + p.getImagePath() %>" width="80">
 			<p>商品名：<%= p.getName() %></p>
 			<p>数量：<%= p.getQuantity() %> 個</p>
 			<p>小計：¥<%= p.getQuantity() * p.getPrice() %></p>
@@ -44,7 +60,11 @@
 	}
 	%>
 
-	<h3>合計金額：¥<%= order.getTotalPrice() %></h3>
+	<h3>料金詳細</h3>
+	<p>商品合計：¥<%= subtotal %></p>
+	<p>送料：¥<%= shipping %></p>
+	<p>支払手数料：¥<%= fee %></p>
+	<p><strong>合計金額：¥<%= total %></strong></p>
 
 	<form action="orderComplete" method="post">
 		<input type="submit" value="注文を確定する">

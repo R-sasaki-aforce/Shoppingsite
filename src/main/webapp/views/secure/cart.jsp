@@ -8,6 +8,7 @@
 User user = (User) session.getAttribute("loginUser");
 ProductDAO dao = new ProductDAO();
 List<Product> cartList = dao.getCartProducts(user.getMember_id());
+boolean hasStockIssue = false;
 %>
 <!DOCTYPE html>
 <html>

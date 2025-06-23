@@ -49,11 +49,22 @@ public class OrderComplete extends HttpServlet {
 				order.getDeliveryMethod().equals("置き配") ? order.getPlacementLocation() : null,
 				order.getTotalPrice()
 			);
+			for (Product p : cartList) {
+				int productId = p.getProductId();
+				int quantity = p.getQuantity();
+				dao.decreaseStock(productId, quantity);  // ← 在庫を減らす
+			}
 
 			// セッションからカート情報と注文情報を削除
 			session.removeAttribute("cartList");
 			session.removeAttribute("order");
 
+			
+			ProductDAO productDao = new ProductDAO();
+			List<Product> products = productDao.getAllProducts();
+			session.setAttribute("productList", products);
+			
+			
 			// 完了画面へリダイレクト
 			response.sendRedirect("order-complete.jsp");
 

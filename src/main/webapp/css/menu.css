@@ -168,5 +168,24 @@ html, body {
   margin: 0 auto;               /* 左右中央寄せ */
   text-align: left;             /* テキストは左揃え */
 }
+.image-wrapper {
+  position: relative;
+  width: fit-content;
+  display: inline-block;
+}
 
+.product-image {
+  width: 100%;
+  display: block;
+}
+
+.soldout-overlay {
+  position: absolute;
+  top: 35px;
+  left: 0px;
+  width: 60px; /* お好みで調整 */
+  opacity: 0.9;
+  z-index: 2;
+  pointer-events: none; /* 重ねてもクリックに影響させない */
+}
 
