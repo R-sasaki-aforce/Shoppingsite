@@ -36,7 +36,7 @@
         価格: <input type="number" name="price" value="<%= product.getPrice() %>"> 円<br>
         在庫数: <input type="number" name="stock" value="<%= product.getStock() %>"> 個<br>
         発売日: <input type="date" name="release_date" value="<%= product.getReleaseDate() %>"><br>
-
+        視聴リンク: <input type="text" name="sample_url" value="<%= product.getSampleUrl() != null ? product.getSampleUrl() : "" %>"><br>
         現在の画像: <img src="<%= request.getContextPath() + "/img/" + product.getImagePath() %>" width="100"><br>
         <!-- hidden フィールドで現在の画像ファイル名も送信 -->
         <input type="hidden" name="current_image_path" value="<%= product.getImagePath() %>">

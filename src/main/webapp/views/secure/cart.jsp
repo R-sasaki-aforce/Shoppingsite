@@ -43,8 +43,7 @@ boolean hasStockIssue = false;
 				%>
 
 				<li><a href="cart.jsp">カート</a></li>
-				<li><a href="#">お気に入り</a></li>
-				<li><a href="#">お問い合わせ</a></li>
+				<li><a href="contact.jsp">お問い合わせ</a></li>
 			</div>
 		</ul>
 	</nav>

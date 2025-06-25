@@ -41,6 +41,6 @@
 </form>
 	<%} %>
 
-<a href="user-menu.jsp">会員メニューに戻る</a>
+<a href="mypage.jsp">会員メニューに戻る</a>
 </body>
 </html>

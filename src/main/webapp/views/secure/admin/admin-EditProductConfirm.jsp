@@ -19,6 +19,7 @@
 	<p>価格: <%= product.getPrice() %> 円</p>
 	<p>在庫数: <%= product.getStock() %> 個</p>
 	<p>発売日: <%= product.getReleaseDate() %></p>
+	<p>視聴リンク: <%= product.getSampleUrl() %></p>
 	<p>画像ファイル名: <%= product.getImagePath() %></p>
 <p>選択した画像: <img src="<%= request.getContextPath() + "/img/" + product.getImagePath() %>" width="100"></p>
 	<form action="update-product-final" method="post">

@@ -15,6 +15,7 @@
 <body>
 	<h1>商品管理画面</h1>
 	<a href="admin-ProductAdd.jsp">商品登録</a>
+	<a href="admin-menu.jsp">戻る</a>
     <%
 		String deleted = request.getParameter("deleted");
 		if ("1".equals(deleted)) {
@@ -74,6 +75,5 @@
 	</table>
 
 	<br>
-	<a href="admin-menu.jsp">戻る</a>
 </body>
 </html>

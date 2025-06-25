@@ -2,6 +2,7 @@ package jp.co.aforce.servlet.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Date;
 
 import jakarta.servlet.ServletException;
@@ -32,10 +33,28 @@ public class EditProductConfirm extends HttpServlet {
 		int price = Integer.parseInt(request.getParameter("price"));
 		int stock = Integer.parseInt(request.getParameter("stock"));
 		String releaseDate = request.getParameter("release_date");
+		String sampleUrl = request.getParameter("sample_url");
 		
 		
-		Part filePart = request.getPart("image_path");
-		String fileName = filePart.getSubmittedFileName();
+		
+		
+		
+		Part imagePart = request.getPart("image_path");
+		 String fileName = null;
+		
+		 String submittedFileName = Paths.get(imagePart.getSubmittedFileName()).getFileName().toString();
+		
+		//String fileName = filePart.getSubmittedFileName();
+		
+		
+		 if (submittedFileName != null && !submittedFileName.isEmpty()) {
+	            // 新しい画像が選ばれている
+	            fileName = submittedFileName;
+	            // 保存処理（imagePart.getInputStream()など）を行う
+	        } else {
+	            // 画像が選択されていない場合（ファイル名が空）
+	            fileName = request.getParameter("current_image_path");
+	        }
 		
 		 if (fileName != null && !fileName.isEmpty()) {
 	            // サーバー上のディレクトリにファイルを保存する処理を追加
@@ -54,7 +73,7 @@ public class EditProductConfirm extends HttpServlet {
 	             String fileSavePath2 = uploadDirectory2 + fileName;
 	             // ファイルを保存
 	             //filePart.write(fileSavePath);  //// 実際にファイルをサーバーに保存
-	             filePart.write(fileSavePath2);
+	             imagePart.write(fileSavePath2);
 	             System.out.println("File uploaded: " + fileName);
 		 }
 		
@@ -66,6 +85,7 @@ public class EditProductConfirm extends HttpServlet {
 		product.setGenre(genre);
 		product.setPrice(price);
 		product.setStock(stock);
+		product.setSampleUrl(sampleUrl);
 		
 		if (releaseDate != null && !releaseDate.isEmpty()) {
 			product.setReleaseDate(Date.valueOf(releaseDate));
@@ -74,7 +94,7 @@ public class EditProductConfirm extends HttpServlet {
 		product.setImagePath(fileName); // 仮でファイル名だけ保持（本保存は後で）
 
 		session.setAttribute("product", product);
-		session.setAttribute("imagePart", filePart); // 画像ファイルのPartも保持
+		//session.setAttribute("imagePart", filePart); // 画像ファイルのPartも保持
 
 		request.getRequestDispatcher("admin-EditProductConfirm.jsp").forward(request, response);
 	}

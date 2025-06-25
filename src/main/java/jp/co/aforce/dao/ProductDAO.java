@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.co.aforce.beans.Order;
+import jp.co.aforce.beans.OrderItem;
 import jp.co.aforce.beans.Product;
 
 public class ProductDAO extends DAO {
@@ -442,7 +444,7 @@ public class ProductDAO extends DAO {
 
 		if (p.getImagePath() != null && !p.getImagePath().isEmpty()) {
 			// 画像も含めて更新
-			sql = "UPDATE products SET name=?, artist_name=?, genre=?, price=?, stock=?, release_date=?, image_path=?, updated_at=NOW() WHERE product_id=?";
+			sql = "UPDATE products SET name=?, artist_name=?, genre=?, price=?, stock=?, release_date=?, image_path=?,sample_url=?, updated_at=NOW() WHERE product_id=?";
 			st = con.prepareStatement(sql);
 			st.setString(1, p.getName());
 			st.setString(2, p.getArtistName());
@@ -457,11 +459,12 @@ public class ProductDAO extends DAO {
 			}
 
 			st.setString(7, p.getImagePath());
-			st.setInt(8, p.getProductId());
+			st.setString(8, p.getSampleUrl());
+			st.setInt(9, p.getProductId());
 
 		} else {
 			// 画像以外を更新
-			sql = "UPDATE products SET name=?, artist_name=?, genre=?, price=?, stock=?, release_date=?, updated_at=NOW() WHERE product_id=?";
+			sql = "UPDATE products SET name=?, artist_name=?, genre=?, price=?, stock=?, release_date=?,sample_url=?, updated_at=NOW() WHERE product_id=?";
 			st = con.prepareStatement(sql);
 			st.setString(1, p.getName());
 			st.setString(2, p.getArtistName());
@@ -474,8 +477,8 @@ public class ProductDAO extends DAO {
 			} else {
 				st.setNull(6, java.sql.Types.DATE);
 			}
-
-			st.setInt(7, p.getProductId());
+			st.setString(7, p.getSampleUrl());
+			st.setInt(8, p.getProductId());
 		}
 
 		int result = st.executeUpdate();
@@ -522,4 +525,99 @@ public class ProductDAO extends DAO {
 
 		con.close();
 	}
+	public List<Order> getOrdersByMemberId(String memberId) throws Exception {
+	    List<Order> orderList = new ArrayList<>();
+
+	    Connection con = getConnection();
+	    String sql = "SELECT * FROM orders WHERE member_id = ? ORDER BY order_date DESC";
+	    PreparedStatement st = con.prepareStatement(sql);
+	    st.setString(1, memberId);
+	    ResultSet rs = st.executeQuery();
+
+	    while (rs.next()) {
+	        Order order = new Order();
+	        order.setOrderId(rs.getInt("order_id"));
+	        order.setMemberId(rs.getString("member_id"));
+	        order.setOrderDate(rs.getTimestamp("order_date"));
+	        order.setTotalPrice(rs.getInt("total_price"));
+	        order.setPaymentMethod(rs.getString("payment_method"));
+	        order.setShippingAddress(rs.getString("shipping_address"));
+	        order.setDeliveryMethod(rs.getString("delivery_method"));
+	        order.setPlacementLocation(rs.getString("placement_location"));
+
+	        // 子テーブルのorder_itemsを取得
+	        order.setItems(getOrderItemsByOrderId(order.getOrderId(), con));
+
+	        orderList.add(order);
+	    }
+
+	    rs.close();
+	    st.close();
+	    con.close();
+
+	    return orderList;
+	}
+
+	private List<OrderItem> getOrderItemsByOrderId(int orderId, Connection con) throws Exception {
+	    List<OrderItem> items = new ArrayList<>();
+
+	    String sql = """
+	        SELECT oi.*, p.image_path
+	        FROM order_items oi
+	        JOIN products p ON oi.product_id = p.product_id
+	        WHERE oi.order_id = ?
+	    """;
+
+	    try (PreparedStatement st = con.prepareStatement(sql)) {
+	        st.setInt(1, orderId);
+	        ResultSet rs = st.executeQuery();
+
+	        while (rs.next()) {
+	            OrderItem item = new OrderItem();
+	            item.setOrderItemId(rs.getInt("order_item_id"));
+	            item.setOrderId(rs.getInt("order_id"));
+	            item.setProductId(rs.getInt("product_id"));
+	            item.setQuantity(rs.getInt("quantity"));
+	            item.setPrice(rs.getInt("price"));
+	            item.setProductImagePath(rs.getString("image_path")); // 追加
+
+	            items.add(item);
+	        }
+
+	        rs.close();
+	    }
+
+	    return items;
+	}
+	public List<Order> getAllOrders() throws Exception {
+	    List<Order> orderList = new ArrayList<>();
+	    Connection con = getConnection();
+
+	    String sql = "SELECT * FROM orders ORDER BY order_date DESC";
+	    try (PreparedStatement st = con.prepareStatement(sql)) {
+	        ResultSet rs = st.executeQuery();
+
+	        while (rs.next()) {
+	            Order order = new Order();
+	            order.setOrderId(rs.getInt("order_id"));
+	            order.setMemberId(rs.getString("member_id"));
+	            order.setOrderDate(rs.getTimestamp("order_date"));
+	            order.setTotalPrice(rs.getInt("total_price"));
+	            order.setPaymentMethod(rs.getString("payment_method"));
+	            order.setShippingAddress(rs.getString("shipping_address"));
+	            order.setDeliveryMethod(rs.getString("delivery_method"));
+	            order.setPlacementLocation(rs.getString("placement_location"));
+
+	            // 子テーブル order_items を取得
+	            order.setItems(getOrderItemsByOrderId(order.getOrderId(), con));
+	            orderList.add(order);
+	        }
+
+	        rs.close();
+	    }
+
+	    con.close();
+	    return orderList;
+	}
+
 }

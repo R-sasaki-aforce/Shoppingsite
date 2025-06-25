@@ -55,6 +55,10 @@ public class OrderComplete extends HttpServlet {
 				dao.decreaseStock(productId, quantity);  // ← 在庫を減らす
 			}
 
+			
+			
+			
+			session.setAttribute("purchasedItems", cartList);
 			// セッションからカート情報と注文情報を削除
 			session.removeAttribute("cartList");
 			session.removeAttribute("order");

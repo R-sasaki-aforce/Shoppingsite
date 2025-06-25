@@ -4,16 +4,22 @@
 html, body {
   margin: 0;
   padding: 0;
+  padding-top: 25px;
 }
 
 /* ナビゲーションバー */
 .menu-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   list-style: none;
   margin: 0;
-  padding: 10px 10px;
+  padding: 10px 0;
   background-color: rgb(29, 29, 29);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   flex-wrap: wrap;
@@ -30,6 +36,10 @@ html, body {
 }
 
 /* 検索フォーム */
+.search-box {
+  margin-left: 100px;
+}
+
 .search-box form {
   display: flex;
   align-items: center;
@@ -52,29 +62,87 @@ html, body {
   cursor: pointer;
 }
 
-.search-box {
-  margin-left: 100px;
-}
-
 .menu-right {
   display: flex;
   gap: 20px;
 }
 
-/* 商品一覧全体 */
-.items {
-  display: flex;
-  flex-wrap: wrap;           /* 折り返しを許可 */
-  justify-content: flex-start; /* 左詰め */
-  gap: 20px;                 /* 商品間の余白 */
-  padding: 40px 160px;
+/* スライダー（メインビジュアル） */
+.mainvisual {
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  background-color: #fff;
+  margin: 0 auto 16px auto;
+  overflow: hidden;
 }
 
-/* 商品カード：固定サイズにすることで4列に制御しやすく */
+.mainvisual .slick-slide {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainvisual .slick-slide > div {
+  width: 100%;
+  height: 100%;
+}
+
+.mainvisual img {
+  width: 90%;
+  height: 100%;
+  max-width: 1000px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* スマホ用調整 */
+@media screen and (max-width: 768px) {
+  .mainvisual {
+    aspect-ratio: 4 / 3;
+  }
+  .mainvisual img {
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
+/* 並び替えボタン */
+.sort-buttons {
+  margin: 4px 0 16px 5px;
+  display: flex;
+  gap: 10px;
+}
+
+.sort-button {
+  padding: 4px 10px;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #555;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.sort-button:hover {
+  background-color: #444;
+}
+
+/* 商品一覧 */
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 10px 20px;
+}
+
 .item {
-  flex: 1 1 calc(25%); /* 4列に並ぶように設定（余白を狭く） */
+  width: calc(33.333% - 20px);
   box-sizing: border-box;
-  padding: 10px 0px; /* ← 横の余白を小さく（左右6px） */
+  padding: 10px 0;
   text-align: center;
   background-color: #fff;
   border-radius: 8px;
@@ -82,9 +150,6 @@ html, body {
   margin-bottom: 20px;
 }
 
-
-
-/* 商品画像 */
 .item img {
   width: 100%;
   max-height: 120px;
@@ -93,17 +158,18 @@ html, body {
   margin-bottom: 8px;
 }
 
-/* 商品名・アーティスト・価格 */
-.product-name {
-  font-weight: bold;
+.product-genre,
+.artist-name,
+.product-name,
+.product-price-label,
+.product-price {
+  font-size: 14px;
   margin: 4px 0;
-  font-size: 13px;
 }
 
-.artist-name {
-  font-size: 12px;
-  color: #333;
-  margin-bottom: 4px;
+.product-name {
+  font-weight: bold;
+  font-size: 13px;
 }
 
 .product-price-label {
@@ -113,61 +179,49 @@ html, body {
 }
 
 .product-price {
-  font-size: 14px;
   font-weight: bold;
-}
-.product-genre {
-  font-size: 14px;     /* アーティスト名と同程度に */
-  color: #555;         /* 少し落ち着いた色に */
-  margin: 4px 0;
-}
-
-.artist-name {
-  font-size: 14px;
-  color: #555;
-  margin: 4px 0;
 }
 
 .product-actions {
   display: flex;
-  align-items: flex-start; /* ← 選択ボタンは上、ボタンは下にずらせる */
+  align-items: flex-start;
   gap: 4px;
 }
-/* 数量セレクトボックス */
+
+/* 数量とカートボタン */
 .quantity {
   padding: 2px 6px;
   height: 26px;
-  border: 1px solid #555;        /* 少し薄い枠線 */
-  background-color: #222;         /* 濃いグレー（黒より少し明るい） */
+  border: 1px solid #555;
+  background-color: #222;
   color: #fff;
   font-size: 12px;
-  border-radius: 0;               /* 角丸なし */
+  border-radius: 4px;
 }
 
-/* カートに追加ボタン */
 .cartButton {
   padding: 2px 6px;
-  height: 26px;                   /* 数量と同じ高さに揃える */
-  background-color: #222;         /* 濃いグレー（黒に近いがやや薄い） */
+  height: 26px;
+  background-color: #222;
   color: #fff;
   border: 1px solid #555;
   font-size: 12px;
   cursor: pointer;
-  border-radius: 0;
-  margin-top: 0px;
+  border-radius: 4px;
   margin-left: 5px;
   transition: background-color 0.2s ease;
 }
 
-/* ホバー時の色変化（少し明るく） */
 .cartButton:hover {
   background-color: #444;
 }
+
 .product-details {
-  width: fit-content;           /* 中身に合わせた幅にする */
-  margin: 0 auto;               /* 左右中央寄せ */
-  text-align: left;             /* テキストは左揃え */
+  width: fit-content;
+  margin: 0 auto;
+  text-align: left;
 }
+
 .image-wrapper {
   position: relative;
   width: fit-content;
@@ -183,9 +237,45 @@ html, body {
   position: absolute;
   top: 35px;
   left: 0px;
-  width: 60px; /* お好みで調整 */
+  width: 60px;
   opacity: 0.9;
   z-index: 2;
-  pointer-events: none; /* 重ねてもクリックに影響させない */
+  pointer-events: none;
 }
 
+/* モーダル */
+.modal {
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 40%;
+  border-radius: 10px;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+#modal-description {
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 8px;
+}

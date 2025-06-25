@@ -10,6 +10,7 @@
 </head>
 <body>
 <h1>会員情報管理</h1>
+<a href="admin-menu.jsp">管理者メニューに戻る</a>
     <table border="1">
         <thead>
             <tr>
@@ -68,7 +69,6 @@
     </table>
     
     <br>
-    <a href="admin-menu.jsp">管理者メニューに戻る</a>
 
 
 

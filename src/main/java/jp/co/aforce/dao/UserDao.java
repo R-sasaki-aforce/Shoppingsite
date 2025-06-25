@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.co.aforce.beans.Contact;
 import jp.co.aforce.beans.User;
 import jp.co.aforce.beans.UserBean;
 
@@ -227,5 +228,60 @@ public class UserDao extends DAO {
 		con.close();
 
 		return user;
+	}
+	/**
+	 * お問い合わせ内容を contacts テーブルに登録するメソッド
+	 *
+	 * @param memberId ユーザーのID（外部キー）
+	 * @param name 名前
+	 * @param email メールアドレス
+	 * @param subject 件名
+	 * @param message お問い合わせ内容
+	 * @throws Exception
+	 */
+	public void insertContact(String memberId, String name, String email, String subject, String message) throws Exception {
+		Connection con = null;
+		PreparedStatement st = null;
+
+		try {
+			con = getConnection();
+
+			String sql = "INSERT INTO contacts (member_id, name, email, subject, message) VALUES (?, ?, ?, ?, ?)";
+			st = con.prepareStatement(sql);
+			st.setString(1, memberId);
+			st.setString(2, name);
+			st.setString(3, email);
+			st.setString(4, subject);
+			st.setString(5, message);
+
+			st.executeUpdate();
+		} finally {
+			if (st != null) st.close();
+			if (con != null) con.close();
+		}
+	}
+	public List<Contact> getAllContacts() throws Exception {
+		List<Contact> contactList = new ArrayList<>();
+		Connection con = getConnection();
+		String sql = "SELECT * FROM contacts ORDER BY submitted_at DESC";
+		PreparedStatement st = con.prepareStatement(sql);
+		ResultSet rs = st.executeQuery();
+
+		while (rs.next()) {
+			Contact contact = new Contact();
+			contact.setContactId(rs.getInt("contact_id"));
+			contact.setMemberId(rs.getString("member_id"));
+			contact.setName(rs.getString("name"));
+			contact.setEmail(rs.getString("email"));
+			contact.setSubject(rs.getString("subject"));
+			contact.setMessage(rs.getString("message"));
+			contact.setSubmittedAt(rs.getTimestamp("submitted_at"));
+			contactList.add(contact);
+		}
+
+		rs.close();
+		st.close();
+		con.close();
+		return contactList;
 	}
 }

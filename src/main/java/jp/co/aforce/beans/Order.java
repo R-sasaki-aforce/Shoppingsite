@@ -1,17 +1,19 @@
 package jp.co.aforce.beans;
 
 import java.io.Serializable;
-import java.security.Timestamp;
+import java.util.List;
 
 public class Order  implements Serializable {
 	private int orderId;
 	private String memberId;
-	private Timestamp orderDate;
+	private java.sql.Timestamp orderDate;
 	private int totalPrice;
 	private String paymentMethod;
 	private String shippingAddress;
 	private String deliveryMethod;
 	private String placementLocation;
+	private List<OrderItem> items;
+	
 	public int getOrderId() {
 		return orderId;
 	}
@@ -24,11 +26,11 @@ public class Order  implements Serializable {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public Timestamp getOrderDate() {
+	public java.sql.Timestamp getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Timestamp orderDate) {
-		this.orderDate = orderDate;
+	public void setOrderDate(java.sql.Timestamp timestamp) {
+		this.orderDate = timestamp;
 	}
 	public int getTotalPrice() {
 		return totalPrice;
@@ -59,6 +61,12 @@ public class Order  implements Serializable {
 	}
 	public void setPlacementLocation(String placementLocation) {
 		this.placementLocation = placementLocation;
+	}
+	public List<OrderItem> getItems() {
+		return items;
+	}
+	public void setItems(List<OrderItem> items) {
+		this.items = items;
 	}
 	
 	

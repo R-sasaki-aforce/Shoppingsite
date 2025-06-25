@@ -14,7 +14,8 @@
 	
 	<a href="admin-product-list">商品管理</a>
 	<a href="admin-users-list">会員情報管理</a>
-	<a href="admin-OrderHistoryList.jsp">注文履歴</a>
+	<a href="admin-order-history">注文履歴</a>
+	<a href="admin-contacts-lists">お問い合わせ閲覧</a>
 
 	<form action="logout" method="post">
 		<input type="submit" value="ログアウト">
