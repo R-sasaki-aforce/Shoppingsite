@@ -20,11 +20,11 @@
 
     <form action="useraddconfirm" method="post">
         ユーザーID:
-        <input type="text" name="member_id" pattern="[A-Za-z0-9]{1,255}"
+        <input type="text" name="member_id" placeholder="ユーザーID（半角英数字）"pattern="[A-Za-z0-9]{1,255}"
                value="<%= user.getMember_id() %>" required>
 
         パスワード:
-        <input type="text" name="password" pattern="[A-Za-z0-9]{1,}"
+        <input type="text" name="password" placeholder="パスワード (半角英数字)"pattern="[A-Za-z0-9]{1,}"
                value="<%= user.getPassword() %>" required>
 
         名前（姓）:

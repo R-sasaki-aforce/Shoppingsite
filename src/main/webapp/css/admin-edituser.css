@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+.admin-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.admin-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.info-box {
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #333;
+}
+
+.admin-form label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.admin-form input[type="text"],
+.admin-form input[type="email"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.admin-button {
+  background-color: #222;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.admin-button:hover {
+  background-color: #444;
+}
+
+.return-button {
+  background-color: #888;
+}
+
+.return-button:hover {
+  background-color: #666;
+}
+
+.error-message {
+  color: #b00;
+  font-weight: bold;
+  text-align: center;
+}

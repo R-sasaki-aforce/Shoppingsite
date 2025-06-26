@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+@charset "UTF-8";
+
+/* 全体レイアウト */
+body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 中央ボックス */
+.complete-container {
+    background-color: #fff;
+    padding: 35px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
+}
+
+/* タイトル */
+.page-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* メッセージ */
+.message {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* ボタン */
+.button {
+    display: inline-block;
+    background-color: #222;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.button:hover {
+    background-color: #444;
+}

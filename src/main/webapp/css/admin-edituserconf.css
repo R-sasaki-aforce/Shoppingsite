@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+.admin-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", sans-serif;
+    text-align: center;
+}
+
+.admin-title {
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+.info-box p {
+    font-size: 15px;
+    margin: 10px 0;
+    color: #333;
+    text-align: left;
+}
+
+.form-buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.admin-button {
+    background-color: #222;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.admin-button:hover {
+    background-color: #444;
+}
+
+.return-button {
+    background-color: #888;
+}
+
+.return-button:hover {
+    background-color: #666;
+}
+
+.error-message {
+    color: #b00;
+    font-weight: bold;
+    margin: 20px 0;
+}

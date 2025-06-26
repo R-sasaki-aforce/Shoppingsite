@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+/* 全体レイアウト */
+body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 40px 0;  /* 上下に余白を確保 */
+    min-height: 100vh; /* 高さは最低限100%確保 */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 上寄せに変更 */
+}
+
+
+
+/* フォーム全体 */
+.form-container {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 500px;
+}
+
+/* タイトル */
+.form-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* 各入力項目 */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="url"],
+.form-group input[type="file"],
+.form-group textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* ジャンル選択のラジオボタン */
+.genre-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.genre-options label {
+    font-weight: normal;
+}
+
+/* ボタン部分 */
+.form-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.form-buttons input[type="submit"],
+.form-buttons .back-button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #222;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.form-buttons input[type="submit"]:hover,
+.form-buttons .back-button:hover {
+    background-color: #444;
+}

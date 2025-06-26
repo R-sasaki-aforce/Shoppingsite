@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+.admin-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.admin-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.admin-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.actions-cell {
+  white-space: nowrap;
+}
+
+.action-button,
+.delete-button {
+  background-color: #222;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  font-size: 13px;
+}
+
+.delete-button {
+  background-color: #d9534f;
+}
+
+.action-button:hover {
+  background-color: #333;
+}
+
+.delete-button:hover {
+  background-color: #c9302c;
+}
+
+.no-data {
+  text-align: center;
+  color: #777;
+  font-size: 15px;
+}

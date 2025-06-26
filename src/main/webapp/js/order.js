@@ -39,3 +39,4 @@ function updateTotal() {
 }
 
 document.addEventListener("DOMContentLoaded", updateTotal);
+

@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>お問い合わせ</title>
 <link rel="stylesheet" href="../../css/menu.css">
+ <link rel="stylesheet" href="../../css/contact.css">
 </head>
 <body>
 <nav class="navbar">
@@ -37,24 +38,27 @@
 			</div>
 		</ul>
 	</nav>
-<div class="contact-submit">
-    <h2>お問い合わせフォーム</h2>
-    <form action="contact-submit" method="post">
-        <label for="name">お名前:</label>
-        <input type="text" id="name" name="name" required>
 
-        <label for="email">メールアドレス:</label>
-        <input type="email" id="email" name="email" required>
+    <h1 class="page-title">お問い合わせフォーム</h1>
 
-        <label for="subject">件名:</label>
-        <input type="text" id="subject" name="subject" required>
+    <div class="registration-container">
+        <form action="contact-submit" method="post">
+            <label for="name">お名前:</label>
+            <input type="text" id="name" name="name" required>
 
-        <label for="message">お問い合わせ内容:</label>
-        <textarea id="message" name="message" rows="8" required></textarea>
+            <label for="email">メールアドレス:</label>
+            <input type="email" id="email" name="email" required>
 
-        <input type="submit" value="送信">
-    </form>
-</div>
+            <label for="subject">件名:</label>
+            <input type="text" id="subject" name="subject" required>
+
+            <label for="message">お問い合わせ内容:</label>
+            <textarea id="message" name="message" rows="8" required style="width: 100%; padding: 8px; margin: 6px 0 14px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; box-sizing: border-box;"></textarea>
+
+            <input type="submit" value="送信">
+        </form>
+    </div>
+
 
 </body>
 </html>

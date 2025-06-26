@@ -25,7 +25,7 @@ public class LogOUT extends HttpServlet {
 		//session.removeAttribute("userName");
 		session.removeAttribute("loginUser");
 		session.removeAttribute("editinfo");
-		response.sendRedirect(request.getContextPath() +"/views/login-in.jsp");
+		response.sendRedirect(request.getContextPath() +"/views/logoutComplete.jsp");
 //		確認用
 		//System.out.println(session.getAttribute("userName"));
 	}

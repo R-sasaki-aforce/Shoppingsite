@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+/* 共通全体レイアウト */
+body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ページタイトル */
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* 全体フォームボックス */
+.order-form-container {
+    width: 90%;
+    max-width: 720px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+/* セクション間隔 */
+.order-section {
+    margin-bottom: 25px;
+}
+
+/* 小見出し */
+.order-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* セレクトボックスとテキストエリア */
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+/* ラジオボタンラベル */
+.order-section label {
+    font-size: 14px;
+    display: block;
+    margin: 4px 0;
+    color: #333;
+}
+
+/* カート内の商品ブロック */
+.order-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.order-item img {
+    width: 80px;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.order-item-details {
+    flex: 1;
+}
+
+.order-item-details p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #222;
+}
+
+/* 合計金額 */
+.order-section p {
+    font-size: 14px;
+    color: #333;
+    margin: 6px 0;
+}
+
+/* 合計金額強調 */
+.order-section p strong {
+    font-size: 16px;
+    color: #000;
+}
+
+/* 注文ボタン */
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #222;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #444;
+}
+
+/* 戻るリンク */
+a {
+    display: block;
+    margin-top: 20px;
+    font-size: 13px;
+    text-align: center;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

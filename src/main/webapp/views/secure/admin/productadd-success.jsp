@@ -4,10 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>商品登録完了</title>
+<link rel="stylesheet" href="../../../css/adminproduct-complete.css">
 </head>
 <body>
-<h1>商品登録完了</h1>
- <a href="admin-ProductsList.jsp">戻る</a>
+<div class="complete-container">
+    <h2 class="page-title">商品登録が完了しました</h2>
+    <p class="sub-message">新しい商品が正常に登録されました。</p>
+    
+    <a href="admin-ProductsList.jsp" class="button">商品一覧に戻る</a>
+</div>
 </body>
 </html>

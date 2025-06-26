@@ -4,11 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>削除完了</title>
+<link rel="stylesheet" href="../css/complete.css">
 </head>
 <body>
-<h1>削除完了</h1>
-
-<a href="login-in.jsp">ログイン画面に戻る</a>
+    <div class="complete-container">
+        <h1 class="page-title">会員情報の削除が完了しました</h1>
+        <p class="sub-message">ご利用ありがとうございました。</p>
+        <a href="login-in.jsp" class="button">ログイン画面に戻る</a>
+    </div>
 </body>
 </html>

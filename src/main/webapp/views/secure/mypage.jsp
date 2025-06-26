@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../css/menu.css" />
+<link rel="stylesheet" href="../../css/mypage.css" />
 <title>マイページ</title>
 </head>
 <body>
@@ -40,26 +41,30 @@
 		</ul>
 	</nav>
 <h1>登録されている情報</h1>
+<div class="user-info">
 ユーザーID：<%=user.getMember_id()%>
 <br>名前＿姓：<%=user.getLast_name()%>
 <br>名前＿名：<%=user.getFirst_name()%>
 <br>住所：<%=user.getAddress()%>
 <br>メールアドレス：<%=user.getMail_address()%>
+</div>
 
-
-<form action="order-history" method="get">
-		<input type="submit" value="注文履歴">
-	</form>
-<form action="retouching.jsp" method="post">
-		<input type="submit" value="修正">
-	</form>
-	<form action="user-delete" method="post">
-		<input type="submit" value="削除" onclick="return confirm('会員情報を全て削除してもよろしいですか？');"><br>
-	</form>
-	<form action="logout" method="post">
-		<input type="submit" value="ログアウト">
-	</form>
-
+<div class="button-area">
+  <form action="order-history" method="get">
+    <input type="submit" class="mypage-button" value="注文履歴を見る">
+  </form>
+  <form action="retouching.jsp" method="post">
+    <input type="submit" class="mypage-button" value="会員情報を修正">
+  </form>
+  <form action="user-delete" method="post">
+    <input type="submit" class="mypage-button" value="会員情報を削除" onclick="return confirm('会員情報を全て削除してもよろしいですか？');">
+  </form>
+</div>
+<div class="logout-container">
+  <form action="logout" method="post">
+    <input type="submit" class="mypage-button" value="ログアウト">
+  </form>
+</div>
 
 </body>
 </html>

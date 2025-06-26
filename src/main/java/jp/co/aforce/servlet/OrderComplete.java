@@ -19,62 +19,69 @@ import jp.co.aforce.dao.ProductDAO;
  */
 @WebServlet("/views/secure/orderComplete")
 public class OrderComplete extends HttpServlet {
+
+	private static final Object lock = new Object();
+	private static volatile boolean isProcessing = false;
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		
-		
+
+		// ここでフラグ確認と設定を1つの synchronized にまとめる
+		synchronized (lock) {
+			if (isProcessing) {
+				response.sendRedirect("order-busy.jsp");  // 処理中ページに遷移
+				return;
+			}
+			isProcessing = true; // フラグ立て
+		}
+
 		try {
-			// OrderオブジェクトとcartListをセッションから取得
+			Thread.sleep(7000);  // テスト用ディレイ
+
 			Order order = (Order) session.getAttribute("order");
 			@SuppressWarnings("unchecked")
 			List<Product> cartList = (List<Product>) session.getAttribute("cartList");
 
-			// カートが空または情報がない場合
 			if (order == null || cartList == null || cartList.isEmpty()) {
 				response.sendRedirect("order-form.jsp?error=1");
 				return;
 			}
 
-			// DAOで注文処理実行
-			ProductDAO dao =new ProductDAO();
+			ProductDAO dao = new ProductDAO();
 			dao.insertOrder(
 				order.getMemberId(),
 				cartList,
 				order.getPaymentMethod(),
 				order.getShippingAddress(),
 				order.getDeliveryMethod(),
-				order.getDeliveryMethod().equals("置き配") ? order.getPlacementLocation() : null,
+				"置き配".equals(order.getDeliveryMethod()) ? order.getPlacementLocation() : null,
 				order.getTotalPrice()
 			);
+
 			for (Product p : cartList) {
-				int productId = p.getProductId();
-				int quantity = p.getQuantity();
-				dao.decreaseStock(productId, quantity);  // ← 在庫を減らす
+				dao.decreaseStock(p.getProductId(), p.getQuantity());
 			}
 
-			
-			
-			
 			session.setAttribute("purchasedItems", cartList);
-			// セッションからカート情報と注文情報を削除
 			session.removeAttribute("cartList");
 			session.removeAttribute("order");
 
-			
-			ProductDAO productDao = new ProductDAO();
-			List<Product> products = productDao.getAllProducts();
-			session.setAttribute("productList", products);
-			
-			
-			// 完了画面へリダイレクト
+			session.setAttribute("productList", new ProductDAO().getAllProducts());
+
 			response.sendRedirect("order-complete.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("order-form.jsp");
+
+		} finally {
+			// 処理終了時にフラグを戻す
+			synchronized (lock) {
+				isProcessing = false;
+			}
 		}
 	}
 }

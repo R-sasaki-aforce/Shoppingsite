@@ -12,33 +12,41 @@ import jakarta.servlet.http.HttpSession;
 import jp.co.aforce.beans.Order;
 
 @WebServlet("/views/secure/orderConfirm")
-
 public class OrderConfirm extends HttpServlet {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 
-		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		// Orderオブジェクトを生成してフォーム値をセット
-		Order order = new Order();
-		order.setMemberId(request.getParameter("member_id"));
-		order.setPaymentMethod(request.getParameter("payment_method"));
-		order.setShippingAddress(request.getParameter("shipping_address"));
-		order.setDeliveryMethod(request.getParameter("delivery_method"));
-		order.setPlacementLocation(request.getParameter("placement_location"));
-		
-		// 金額（int）変換処理（nullや空の考慮も加えると良い）
-		try {
-			order.setTotalPrice(Integer.parseInt(request.getParameter("total_price")));
-		} catch (NumberFormatException e) {
-			order.setTotalPrice(0); // エラー時は0に設定（適宜エラーハンドリング追加可）
-		}
+        request.setCharacterEncoding("UTF-8");
 
-		// セッションに注文情報を保存
-		session.setAttribute("order", order);
+        // 入力値の取得
+        String memberId = request.getParameter("member_id");
+        String paymentMethod = request.getParameter("payment_method");
+        String shippingAddress = request.getParameter("shipping_address");
+        String deliveryMethod = request.getParameter("delivery_method");
+        String placementLocation = request.getParameter("placement_location");
+        int totalPrice = 0;
 
-		// 確認画面へリダイレクト
-		response.sendRedirect("order-confirm.jsp");
-	}
+        try {
+            totalPrice = Integer.parseInt(request.getParameter("total_price"));
+        } catch (NumberFormatException e) {
+            totalPrice = 0;
+        }
+
+        // Orderオブジェクト作成
+        Order order = new Order();
+        order.setMemberId(memberId);
+        order.setPaymentMethod(paymentMethod);
+        order.setShippingAddress(shippingAddress);
+        order.setDeliveryMethod(deliveryMethod);
+        order.setPlacementLocation(placementLocation);
+        order.setTotalPrice(totalPrice);
+
+        // セッションに保存
+        HttpSession session = request.getSession();
+        session.setAttribute("order", order);
+
+        // 確認ページにリダイレクト（またはフォワード）
+        response.sendRedirect(request.getContextPath() + "/views/secure/order-confirm.jsp");
+    }
 }

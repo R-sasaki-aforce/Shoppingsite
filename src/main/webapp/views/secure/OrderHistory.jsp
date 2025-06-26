@@ -10,39 +10,45 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../css/login.css">
 <title>注文履歴</title>
+
+<link rel="stylesheet" href="../../css/order-history.css">
 </head>
 <body>
-<h1>注文履歴</h1>
 
-<% if (orderList == null || orderList.isEmpty()) { %>
-	<p>注文履歴はありません。</p>
-<% } else { %>
-	<% for (Order order : orderList) { %>
-		<h3>注文番号: <%= order.getOrderId() %></h3>
-		<p>注文日: <%= order.getOrderDate() %></p>
-		<p>支払い方法: <%= order.getPaymentMethod() %></p>
-		<p>配送先: <%= order.getShippingAddress() %></p>
-		<p>合計金額: <%= order.getTotalPrice() %>円</p>
-		
-		<table border="1">
-			<tr>
-				<th>商品イメージ</th>
-				<th>数量</th>
-				<th>価格</th>
-			</tr>
-			<% for (OrderItem item : order.getItems()) { %>
-			<tr>
-			    <td><img src="<%= request.getContextPath() + "/img/" + item.getProductImagePath() %>" width="80"></td>
-				<td><%= item.getQuantity() %></td>
-				<td><%= item.getPrice() %>円</td>
-			</tr>
-			<% } %>
-		</table>
-		<hr>
+<div class="container">
+	<h1 class="page-title">注文履歴</h1>
+	<a class="back-link" href="mypage.jsp">← マイページに戻る</a>
+
+	<% if (orderList == null || orderList.isEmpty()) { %>
+		<p class="no-orders">注文履歴はありません。</p>
+	<% } else { %>
+		<% for (Order order : orderList) { %>
+		<div class="order-box">
+			<h3>注文番号: <%= order.getOrderId() %></h3>
+			<p>注文日: <%= order.getOrderDate() %></p>
+			<p>支払い方法: <%= order.getPaymentMethod() %></p>
+			<p>配送先: <%= order.getShippingAddress() %></p>
+			<p>合計金額: <%= order.getTotalPrice() %>円</p>
+
+			<table class="item-table">
+				<tr>
+					<th>商品イメージ</th>
+					<th>数量</th>
+					<th>価格</th>
+				</tr>
+				<% for (OrderItem item : order.getItems()) { %>
+				<tr>
+					<td><img src="<%= request.getContextPath() + "/img/" + item.getProductImagePath() %>" width="80"></td>
+					<td><%= item.getQuantity() %></td>
+					<td><%= item.getPrice() %>円</td>
+				</tr>
+				<% } %>
+			</table>
+		</div>
+		<% } %>
 	<% } %>
-<% } %>
-<a href="mypage.jsp">マイページに戻る</a>
+</div>
+
 </body>
 </html>
