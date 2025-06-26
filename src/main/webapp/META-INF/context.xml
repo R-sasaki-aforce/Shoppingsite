@@ -9,7 +9,7 @@
 
 
 <!--ローカル用-->
-<Context reloadable="true">
+<!--<Context reloadable="true">
 	<Resource
 		name="jdbc/shoppingsite_sasaki"
 		auth="Container"
@@ -19,12 +19,12 @@
 		username="root"
 		password="renon030228"
 	/>
-</Context>
+</Context>-->
 
 
 
 <!--AWS用-->
-<!--<Context reloadable="true">
+<Context reloadable="true">
     <Resource 
     name="jdbc/shoppingsite_sasaki"
         auth="Container"
@@ -36,4 +36,4 @@
         maxActive="20"
         maxIdle="10"
         maxWait="-1"/>
-</Context>-->
+</Context>
