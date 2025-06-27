@@ -4,12 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../css/login.css">
 <title>ログインページ</title>
+<link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
+
 <div class="login-wrapper">
-    <div class="header-title">Login</div>
+    <!-- タイトル -->
+    <h2 class="header-title">Login</h2>
+
+    <!-- フォーム本体 -->
     <div class="login-container">
         <% session.removeAttribute("confirminfo"); %>
         <form action="login-in" method="post">
@@ -20,5 +24,6 @@
         <a href="registration.jsp">新規会員登録</a>
     </div>
 </div>
+
 </body>
 </html>

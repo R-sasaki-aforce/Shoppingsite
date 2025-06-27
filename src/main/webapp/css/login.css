@@ -7,30 +7,32 @@ body {
     padding: 0;
     height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
-/* ログイン画面のタイトル（中央上） */
+/* ラッパー全体 */
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* タイトル */
 .header-title {
-    position: absolute;
-    top: 19%;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 20px;
     font-weight: bold;
     color: #333;
+    margin-bottom: 15px;
 }
 
 /* フォーム本体 */
 .login-container {
     background-color: #ffffff;
-    padding: 15px 20px;   /* パディング減らす */
+    padding: 15px 20px;
     border-radius: 8px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12); /* 影も少し控えめに */
-    width: 230px;         /* 幅を狭く */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+    width: 230px;
     text-align: center;
 }
 
@@ -38,23 +40,23 @@ body {
 input[type="text"],
 input[type="password"] {
     width: 100%;
-    padding: 6px;         /* 小さめに */
-    margin: 8px 0 12px;   /* マージンも少し小さく */
+    padding: 6px;
+    margin: 8px 0 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    font-size: 13px;      /* フォントサイズ小さめ */
+    font-size: 13px;
 }
 
 /* ログインボタン */
 input[type="submit"] {
     width: 100%;
-    padding: 8px;         /* 少し小さめ */
+    padding: 8px;
     background-color: rgb(40, 40, 40);
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 14px;      /* フォントサイズを小さく */
+    font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -66,8 +68,8 @@ input[type="submit"]:hover {
 /* 登録リンク */
 a {
     display: block;
-    margin-top: 15px;     /* 少し狭め */
-    font-size: 12px;      /* 小さめフォント */
+    margin-top: 15px;
+    font-size: 12px;
     color: rgb(91, 169, 255);
     text-decoration: none;
 }
